@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'org.springframework'
-version '5.2.0.BUILD-SNAPSHOT'
+version '5.1.10.BUILD-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -12,6 +12,5 @@ repositories {
 }
 
 dependencies {
-    compile project(':spring-context')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
