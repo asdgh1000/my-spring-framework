@@ -19,8 +19,24 @@ Idea | ULTIMATE 2018.3
     * (以spring-context为例)当项目构建完之后，直接run spring-context下的test 即完成编译
 
 ### Bean生命周期
+#### 组件类型
+* PostProcessor
+* BeanFactory
+* Aware
+
 #### 核心组件 (所有组件组合起来->spring 容器)
 * BeanDefinition (GenericBeanDefinition)
 * BeanFactory
-* BeanDefinition Map
+* BeanDefinitionMap
 * BeanFactoryPostProcessor
+* singletonObjects
+#### 核心方法
+* registerBeanDefinition
+#### 生命周期流程
+* 扫描
+* 解析
+* getbean
+* 实例化
+* 自动装配
+* life callback
+* 生成代理类

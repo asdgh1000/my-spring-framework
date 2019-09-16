@@ -528,15 +528,22 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
+				//去spring的环境中去执行已经被注册的 BeanFactoryPostProcessors
+				//在bean实例化之前执行 BeanFactoryPostProcessors
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
+				//bean实例化，并注册注册BeanPostProcessors
+				//在bean实例化之前执行 BeanPostProcessors
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
+				//初始化Bean信息
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				//初始化ApplicationEventMulticaster 如果在上下文中没有注册,ApplicationEventMulticaster的bean
+				// 则默认使用SimpleApplicationEventMulticaster
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
@@ -546,6 +553,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+				//初始化
+				//完成此上下文的bean工厂的初始化，初始化所有剩余的单例bean
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
@@ -675,6 +684,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Register default environment beans.
+		//注册spring 默认的几个Bean
 		if (!beanFactory.containsLocalBean(ENVIRONMENT_BEAN_NAME)) {
 			beanFactory.registerSingleton(ENVIRONMENT_BEAN_NAME, getEnvironment());
 		}
@@ -874,6 +884,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.
+		//实例化所有的单例对象
 		beanFactory.preInstantiateSingletons();
 	}
 

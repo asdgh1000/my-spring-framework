@@ -85,6 +85,8 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
 		//先调用GenericApplicationContext 的构造方法,创建DefaultListableBeanFactory工厂类
 		this();
+		//将AppConfig类直接加载到BeanFactory中的BeanDefinitionMap中，即硬编码指定注册AppConfig到容器中
+		//beanDefinitionMap.put(beanName,beanDefinition)
 		register(annotatedClasses);
 		refresh();
 	}

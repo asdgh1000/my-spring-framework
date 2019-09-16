@@ -820,7 +820,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 		// Trigger initialization of all non-lazy singleton beans...
 		for (String beanName : beanNames) {
+			//合并父BeanDefinition
+			//调用beanDefinitionMap.get(beanName)
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+			//如果bean是非抽象，单例，非懒加载 才进行初始化操作
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
 				if (isFactoryBean(beanName)) {
 					Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);
@@ -930,6 +933,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			}
 			else {
 				// Still in startup registration phase
+				//启动注册阶段添加beanDefinition到Map中(硬编码register的AppConfig同样属于启动注册添加的)
 				this.beanDefinitionMap.put(beanName, beanDefinition);
 				this.beanDefinitionNames.add(beanName);
 				removeManualSingletonName(beanName);
