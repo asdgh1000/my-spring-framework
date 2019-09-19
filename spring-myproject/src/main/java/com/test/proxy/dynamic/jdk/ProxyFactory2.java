@@ -16,6 +16,13 @@ import java.lang.reflect.Proxy;
  * 即可以对其进行特殊的操作。也就是说JDK的动态代理还可以代理上述三个方法。
  * <p>
  * - 在invoke方法中我们甚至可以不用Method.invoke方法调用实现类就返回。这种方式常常用在RPC框架中，在invoke方法发起通信调用远端的接口等。
+ * <p>
+ * (通过调用栈可以看到 生成代理对象实际上是调用了
+ * Proxy.apply
+ * -> Class.forName 要求JVM查找并加载指定的类
+ * -> 生成代理类信息
+ * ->调用 ProxyGenerator.generateProxyClass生成 代理类文件
+ * -> Proxy下 static native defineClass0 来生成代理类)
  *
  * @author ltw
  * on 2019-09-18.
@@ -40,17 +47,17 @@ public class ProxyFactory2 implements InvocationHandler {
 		// 设置变量可以保存动态代理类，默认名称以 $Proxy0 格式命名
 		System.getProperties().setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
 
-		// 1. 创建被代理的对象，UserService接口的实现类
+		// 1. 创建被代理的对象，Calculator接口的实现类
 		Calculator calculatorImpl = new Calculator.CalculatorImpl();
 
 		// 2. 获取对应的 ClassLoader
 		ClassLoader classLoader = calculatorImpl.getClass().getClassLoader();
 
-		// 3. 获取所有接口的Class，这里的UserServiceImpl只实现了一个接口UserService，
+		// 3. 获取所有接口的Class，这里的CalculatorImpl只实现了一个接口Calculator
 		Class[] interfacces = calculatorImpl.getClass().getInterfaces();
 
 		// 4. 创建一个将传给代理类的调用请求处理器，处理所有的代理对象上的方法调用
-		//     这里创建的是一个自定义的日志处理器，须传入实际的执行对象 userServiceImpl
+		//  这里创建的是一个自定义的日志处理器，须传入实际的执行对象 calculatorImpl
 		InvocationHandler proxyFactory2 = new ProxyFactory2(calculatorImpl);
 
 		   /*

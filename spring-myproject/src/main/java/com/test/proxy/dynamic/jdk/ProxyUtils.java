@@ -18,7 +18,7 @@ public class ProxyUtils {
 		// 根据类信息和提供的代理类名称，生成字节码
 		byte[] classFile = ProxyGenerator.generateProxyClass(proxyName, clazz.getInterfaces());
 //		String paths = clazz.getResource(".").getPath();
-		String paths = "com/sun/proxy/";
+		String paths = "spring-myproject/src/main/java/com/test/proxy/dynamic/proxyClass/";
 		System.out.println(paths);
 		FileOutputStream out = null;
 		try {
