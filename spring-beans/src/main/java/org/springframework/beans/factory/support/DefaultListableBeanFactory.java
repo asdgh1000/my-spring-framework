@@ -1023,7 +1023,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 	@Override
 	public void registerSingleton(String beanName, Object singletonObject) throws IllegalStateException {
-		super.registerSingleton(beanName, singletonObject);
+		super.registerSingleton(beanName, singletonObject); //注册bean到一级缓存中
 		updateManualSingletonNames(set -> set.add(beanName), set -> !this.beanDefinitionMap.containsKey(beanName));
 		clearByTypeCache();
 	}

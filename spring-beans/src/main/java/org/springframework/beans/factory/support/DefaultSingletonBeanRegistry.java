@@ -130,7 +130,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 * @param beanName the name of the bean
 	 * @param singletonObject the singleton object
 	 */
-	protected void addSingleton(String beanName, Object singletonObject) {
+	protected void addSingleton(String beanName, Object singletonObject) { //直接将bean保存到一级缓存 ,同时删除二级 三级缓存中相关bean信息 并在注册完成bean中加入bean信息
 		synchronized (this.singletonObjects) {
 			this.singletonObjects.put(beanName, singletonObject);
 			this.singletonFactories.remove(beanName);
@@ -229,7 +229,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 				if (logger.isDebugEnabled()) {
 					logger.debug("Creating shared instance of singleton bean '" + beanName + "'");
 				}
-				beforeSingletonCreation(beanName);
+				beforeSingletonCreation(beanName); // 增加beanName到singletonsCurrentlyInCreation
 				boolean newSingleton = false;
 				boolean recordSuppressedExceptions = (this.suppressedExceptions == null);
 				if (recordSuppressedExceptions) {
@@ -259,10 +259,10 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					if (recordSuppressedExceptions) {
 						this.suppressedExceptions = null;
 					}
-					afterSingletonCreation(beanName);
+					afterSingletonCreation(beanName); //Bean实例化完成，从singletonsCurrentlyInCreation删除
 				}
 				if (newSingleton) {
-					addSingleton(beanName, singletonObject);
+					addSingleton(beanName, singletonObject); //增加实例化好的bean到 一级缓存 singletonObjects中，同时在二级三级缓存中删掉该bean
 				}
 			}
 			return singletonObject;

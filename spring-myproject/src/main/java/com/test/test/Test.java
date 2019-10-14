@@ -2,7 +2,6 @@ package com.test.test;
 
 import com.test.config.Appconfig;
 import com.test.service.CityService2;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

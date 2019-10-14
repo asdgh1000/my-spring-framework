@@ -538,7 +538,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
-			//配置工厂的标准上下文特征，例如上下文的ClassLoader和 postProcessor。
+			//配置工厂的标准上下文特征，例如上下文的ClassLoader和 postProcessor。 加载spring内置的bean
 			prepareBeanFactory(beanFactory);
 
 			try {
@@ -576,7 +576,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Instantiate all remaining (non-lazy-init) singletons.
 				//初始化 (核心模块)
-				//完成此上下文的bean工厂的初始化，初始化所有剩余的单例bean
+				//完成此上下文的bean工厂的初始化，实例化，初始化所有剩余的单例bean 有初始化么？
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
