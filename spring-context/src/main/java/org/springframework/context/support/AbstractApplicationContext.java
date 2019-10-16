@@ -557,7 +557,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				//bean实例化，并注册注册BeanPostProcessors
 				//在bean实例化之前执行 BeanPostProcessors (初始化 前后，实例化之前调用)
 
-				//1.创建BeanPostProcessors 实例
+				//1.创建BeanPostProcessors 实例 注册所有实现BeanPostProcessor接口的bean
 				//2.创建InstantiationAwareBeanPostProcessorAdapter实例
 				registerBeanPostProcessors(beanFactory);
 

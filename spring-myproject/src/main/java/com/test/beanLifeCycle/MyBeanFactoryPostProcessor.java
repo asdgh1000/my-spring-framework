@@ -13,7 +13,7 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 	public MyBeanFactoryPostProcessor() {
 		super();
 		System.out.println("这是BeanFactoryPostProcessor实现类构造器！！");
-	}
+}
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)

@@ -1,8 +1,8 @@
 # Bean生命周期
 ## 生命周期大致顺序
-生成BeanDefinition
 ```
--> BeanFactoryPostProcessor
+-> 生成BeanDefinition
+-> 调用 BeanFactoryPostProcessor.postProcessBeanFactory
 ->  bean实例化
     -> 调用构造方法
 -> 属性注入
