@@ -11,6 +11,7 @@ public class BeanLifeCycle {
 
 		ApplicationContext factory = new AnnotationConfigApplicationContext(Appconfig.class);
 		System.out.println("容器初始化成功");
+
 		//得到Preson，并使用
 		Person person = factory.getBean("person", Person.class);
 		System.out.println(person);

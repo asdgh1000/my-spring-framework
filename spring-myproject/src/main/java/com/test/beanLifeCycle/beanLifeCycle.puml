@@ -1,0 +1,11 @@
+@startuml
+配置文件或注类 -> BeanDefinition: 将配置文件加载为BeanDefinition格式，并加入到BeanDefinitionMap中
+BeanDefinition --> BeanFactoryPostProcessor: 类实例化之前执行BeanFactoryPostProcessor.postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+BeanPostProcess -->
+BeanDefinition --> Bean实例化
+实例化Bean --> BeanPostProcessor: postProcessBeforeInitialization(Object bean, String beanName)调用在初始化之前
+实例化Bean --> Bean初始化:
+Bean实例化 --> 属性注入
+
+
+@enduml

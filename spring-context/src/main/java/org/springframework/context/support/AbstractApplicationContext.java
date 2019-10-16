@@ -546,14 +546,19 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// 将加载所有bean定义，但尚未实例化bean 这允许在某些ApplicationContext实现中注册特殊的 BeanPostProcessors等。
 				postProcessBeanFactory(beanFactory);
 
-				// Invoke factory processors registered as beans in the context.
 				//去spring的环境中去执行已经被注册的 BeanFactoryPostProcessors
 				//在bean实例化之前执行 BeanFactoryPostProcessors
+
+				//1.创建BeanFactoryPostProcessor
+				//2.BeanFactoryPostProcessor调用postProcessBeanFactory方法
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
 				//bean实例化，并注册注册BeanPostProcessors
 				//在bean实例化之前执行 BeanPostProcessors (初始化 前后，实例化之前调用)
+
+				//1.创建BeanPostProcessors 实例
+				//2.创建InstantiationAwareBeanPostProcessorAdapter实例
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
